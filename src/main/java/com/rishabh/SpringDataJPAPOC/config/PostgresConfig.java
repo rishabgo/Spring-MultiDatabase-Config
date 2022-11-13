@@ -1,12 +1,12 @@
 package com.rishabh.SpringDataJPAPOC.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -35,14 +35,10 @@ public class PostgresConfig {
     }
 
     @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.postgres")
     public DataSource postgresDataSource() {
 
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("org.postgresql.Driver");
-        dataSource.setUrl("jdbc:postgresql://localhost:5432/product");
-        dataSource.setUsername("postgres");
-        dataSource.setPassword("pasword");
-        return dataSource;
+        return DataSourceBuilder.create().build();
     }
 
     @Bean
