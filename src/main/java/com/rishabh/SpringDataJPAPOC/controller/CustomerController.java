@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 
 @RestController
 public class CustomerController {
@@ -24,5 +26,7 @@ public class CustomerController {
     @PostMapping("/customers")
     public void saveCustomers(@RequestBody final List<Customer> customerList) {
         customerRepository.saveAll(customerList);
+        ConcurrentHashMap map = new ConcurrentHashMap();
+
     }
 }

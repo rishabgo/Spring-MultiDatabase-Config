@@ -20,6 +20,7 @@ public class ProductController {
     public void createProducts(@RequestBody List<Product> productList) {
 
         productRepository.saveAll(productList);
+        productRepository.s
     }
 
     @GetMapping("/products")
